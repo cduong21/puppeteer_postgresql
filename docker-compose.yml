@@ -1,0 +1,31 @@
+version: '2'
+
+services: 
+  puppeteer:
+    container_name: puppeteerhack 
+    build: 
+      context: . 
+      dockerfile: Dockerfile
+    ports: 
+      - "9070:9070"
+    volumes: 
+      - .:/usr/src/app/
+    tty: true
+    command: node postscraper.js
+
+
+  db: 
+    container_name: postgresqldata
+    build: 
+      context: .
+      dockerfile: dockerfile.db
+    ports: 
+      - "5432:5432" 
+    volumes: 
+      - postgres-data:/var/lib/postgresql/data
+      - ./init.sql   
+    restart: always
+  
+volumes: 
+  postgres-data:
+

@@ -1,0 +1,13 @@
+FROM postgres:alpine
+
+ARG POSTGRES_USER=default_user
+ARG POSTGRES_PASSWORD=secret
+ARG POSTGRES_DB=default_db
+
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=postgres
+ENV POSTGRES_DB=puppeteerhack
+
+USER root
+
+COPY ./migrations/* /docker-entrypoint-initdb.d/
